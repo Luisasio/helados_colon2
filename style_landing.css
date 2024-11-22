@@ -1,0 +1,515 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+}
+:root {
+  --color1: #2596be;
+  --color2: white;
+  --color3: #8cf5f9;
+  --color4: #154c79;
+  --color5: #0ca9e2;
+  --color6: red;
+}
+.ancho {
+  width: 1300px;
+  margin: auto;
+}
+.contenedor_nav{
+  background-color: rgba(1, 32, 120, 0.8); /* Color azul con 80% de opacidad */
+  padding: 10px;
+  color: white;
+  position: fixed; /* Fija el nav en la parte superior */
+  top: 0; /* Mantiene el nav en la parte superior */
+  width: 100%;
+  z-index: 1000;
+}
+.centrar {
+  text-align: center;
+}
+.contenedor_logo{
+  display: inline-block;
+  width: 300px;
+  vertical-align: middle;
+  text-align: center;
+}
+.contenedor_opciones{
+  display: inline-block;
+  width: 900px;
+  vertical-align: middle;
+  padding: 9px;
+  text-align: right;
+}
+.estilo_opciones{
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  padding: 1px 10px;
+}
+.estilo_opciones:hover{
+  color: #ffbd2e;
+  transition: 0.5s;
+}
+#inicio{
+  color: #ffbd2e;
+}
+#productos{
+  color: #ffbd2e;
+}
+.cont_redes{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.cont_redes2{
+  background-color: #ff6701;
+  width: 35px;
+  height: 40px;
+  text-align: center;
+  border-radius: 3px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.cont_redes2:hover{
+  background-color: #ffbd2e;
+  transition: 0.5s;
+}
+.insta2{
+  font-size: 18px;
+  color: white;
+  padding-top: 10px;
+}
+.insta{
+  font-size: 20px;
+  padding-top: 5px;
+}
+.contenedor_imagen_principal{
+  background-image: url(img/fondo_helados.jpg);
+  height: 600px;
+  background-size: cover;
+}
+
+.contenedor_imagen_principal h1{
+  padding-top: 240px;
+  color: white;
+  font-size: 80px;
+  text-align: center;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+}
+.contenedor_imagen_principal h2{
+  padding-top: 50px;
+  color: white;
+  font-size: 60px;
+  text-align: center;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+
+}
+.contenedor_imagen_principal h3{
+  text-align: center;
+  padding-top: 40px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  color: #201464 ;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+
+
+}
+.text-center{
+  margin: auto;
+  text-align: center;
+}
+.contenedor_dulces_memorias h2{
+  font-size: 38px;
+  color: #201464;
+  padding-bottom: 20px;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 600;
+}
+.texto-desde{
+  font-size: 16px;
+  color: #a5a5a5;
+  padding-bottom: 5px;
+}
+.barra_amarilla1{
+  border: 0;
+  height: 4px;
+  background-color: #f8ca76;
+  width: 100px;
+}
+.barra_amarilla2{
+  border: 0;
+  height: 4px;
+  background-color: #f8ca76;
+  width: 200px;
+  margin-top: 10px;
+}
+.contenedor_dulces_memorias{
+  font-family: 'Times New Roman', Times, serif;
+  padding: 65px;
+}
+.imagenes_dulces_memorias{
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+}
+.imgcolon1{
+  width: 100%;
+}
+.imagenes_dulces_memorias1{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 48%;
+
+}
+.imagenes_dulces_memorias2{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 50%;
+}
+.texto_dulces_memorias{
+  margin-left:  50px;
+  display: inline-block;
+  width: 700px;
+  vertical-align: top;
+  padding: 10px;
+  padding-top: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #646464;
+}
+.texto_dulces_memorias h3{
+  color: #201464;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  font-size: 20px;
+}
+.contenedor_sabores_trad{
+  background-image: url(img/bkround_fresa.png);
+  background-size: cover;
+  height: 300px;
+  color: white;
+  font-family: "Noto Serif Oriya", serif;
+}
+.contenedor_sabores_trad h2{
+  padding-top: 100px;
+  font-size: 40px;
+  font-weight: 100;
+}
+.contenedor_nuestros_productos{
+  color: #a5a5a5;
+  font-family: "Noto Serif Oriya", serif;
+  text-align: center;
+}
+.contenedor_nuestros_productos p{
+  padding-bottom: 10px;
+}
+.contenedor_nuestros_productos h2{
+  padding-top: 100px;
+  font-size: 40px;
+  font-weight: 100;
+  color: #201464;
+  font-family: "Noto Serif Oriya", serif;
+}
+.cont_prod{
+  border: 1.5px #ccc solid;
+  width: 30%;
+  display: inline-block;
+  text-align: left;
+  margin-right: 10px;
+}
+.cont_prod h2{
+  padding-left: 30px;
+  padding-bottom: 10px;
+  padding-top: 0px;
+}
+.cont_prod hr{
+  margin-left: 30px;
+}
+.cont_prod p{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  width: 350px;
+  padding-left: 30px;
+  font-size: 18px;
+}
+.img-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-prod {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.img-prod:hover {
+  transform: scale(1.5);
+}
+
+.img-prod2{
+  width: 100%;
+  height: 450px;
+}
+.contenddor_ubicacion{
+  display: flex;
+}
+.contenedor-hijo {
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.contenedor_info{
+  background-color: #012078;
+  margin-top: -7px;
+  padding: 70px 60px;
+  color: white;
+  display: flex;
+}
+.contenedor_info h3{
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  color: #ffbd2e;
+}
+.visitanos1{
+  width: 300px;
+  margin-right: 40px;
+
+}
+.visitanos2{
+  width: 300px;
+  margin-right: 40px;
+
+}
+.siguenos{
+  width: 300px;
+}
+.ubi{
+  color: #ff8c2e;
+  padding-right: 10px;
+}
+.tel{
+  padding-bottom: 10px;
+}
+.cont_pie{
+  background-color: #1b1262;
+  padding: 20px;
+  font-size: 9px;
+  color: #ccc;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+}
+.contenedor_imagen_principal_prod{
+  background-image: url(img/fondo_helados.jpg);
+  height: 400px;
+  background-size: cover;
+  display: flex;
+}
+.sorbetes{
+  width: 50%;
+}
+.dulces{
+  width: 50%;
+}
+.titulo_helados{
+  font-size: 30px;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  color: #012078;
+  padding-top: 300px;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+}
+.titulo_dulces{
+  font-size: 30px;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  color: #012078;
+  padding-top: 300px;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+}
+.contenedor_sorbetes_li {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas iguales */
+}
+
+.img_sorbete {
+  width: 325px; /* Hace que cada imagen ocupe el 100% de su columna */
+  height: 325px;
+  background-size: cover;
+
+}
+.texto-sorbete{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.contenedor_dulce_trad{
+  background-image: url(img/polvorones.jpg);
+  height: 300px;
+  background-size: cover;
+}
+.contenedor_dulce_trad h2{
+  color: white;
+  font-family: "Noto Serif Oriya", serif;
+  font-weight: 100;
+  font-size: 50px;
+  padding-top: 150px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.contenedor_formulario_pedidos {
+  border: 1.5px #ccc solid;
+  width:60%;
+  display: inline-block;
+  text-align: left;
+  padding: 10px 30px;
+  text-align: center;
+}
+
+.inputs_campos {
+  width: 100%;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px  var(--color4) solid;
+  font-family: Arial, Helvetica, sans-serif;
+
+  resize: none;
+}
+.inputs_campos:focus{
+  outline: none;
+  border: 2px  var(--color4) solid;
+}
+
+.contenedor_formulario_pedidos label {
+  color: var(--color4);
+}
+
+.izq {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.gris {
+  color: gray; /* Cambia el color de la opción seleccionada */
+}
+
+.altura {
+  height: 150px;
+}
+
+
+.inputs_campos::placeholder {
+  color: gray; /* Cambia "gray" por el color que prefieras */
+  opacity: 1;  /* Asegura que el color del placeholder tenga la opacidad completa */
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.btn_pedido {
+  display: inline-block;
+  width: 300px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  background-color: var(--color4);
+  border: none;
+  border-radius: 5px;
+  margin-left: 210px;
+}
+
+.btn_pedido:hover {
+  background-color: var(--color5);
+}
+
+.cantidad_campo {
+  width: 100px;
+  height: 10px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px  var(--color4) solid;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 30px;
+}
+.contenedor_barra
+{
+  width: 1200px;
+  /* border: red solid; */
+  margin: auto;
+  text-align: center;
+}
+.btn_barra_regresar {
+  display: inline-block;
+  width: 300px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  background-color: var(--color4);
+  border: none;
+  border-radius: 5px;
+}
+
+.btn_barra_regresar:hover {
+  background-color: var(--color5);
+}
+.imagen_barra{
+  width: 400px;
+}
+.dulce-container {
+  max-width: 800px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor */
+  padding: 20px; /* Espaciado interno */
+  background-color: #f9f9f9; /* Color de fondo */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.contenedor7 {
+  margin-bottom: 20px; /* Espaciado entre contenedores */
+}
+
+.titulo-dulce {
+  font-size: 1.5em; /* Tamaño de fuente para los títulos */
+  color: #333; /* Color del texto */
+}
+
+.texto-dulce {
+  font-size: 1.2em; /* Tamaño de fuente para los párrafos */
+  color: #666; /* Color del texto */
+}
+
+.imagen_barra {
+  max-width: 100%; /* Hacer que la imagen sea responsiva */
+  height: auto; /* Mantener la relación de aspecto */
+  border-radius: 5px; /* Bordes redondeados para la imagen */
+}

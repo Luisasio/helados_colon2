@@ -1,0 +1,374 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: url(./img/bg.jpg) no-repeat center top;
+    background-size:cover;
+
+}
+
+:root {
+    --color1: rgb(37, 150, 190);
+    --color2: white;
+    --color3: #8cf5f9;
+    --color4: #154c79;
+    --color5: #0ca9e2;
+    --color6: red;
+}
+
+.ancho {
+    width: 1200px;
+    margin: auto;
+}
+
+.negritas {
+    font-weight: bold;
+}
+
+.centrar {
+    text-align: center;
+}
+
+/* LOGIN CSS ------------------------------------------------------- */
+
+.logo_colon {
+    width: 300px;
+    margin-bottom: -80px;
+}
+
+.contenedor1 {
+    background-color: var(--color1);
+    width: 400px;
+    margin-left: 397px;
+    border-radius: 5px;
+    color: var(--color2);
+}
+
+.contenedor1 h1 {
+    margin-top: 40px;
+}
+
+.campos_login {
+    width: 85%;
+    border-radius: 5px;
+    border: 2px var(--color3) solid;
+    padding: 10px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    resize: none;
+}
+
+.campos_login:focus{
+    outline: none;
+}
+
+.btn_iniciar_sesion{
+    width: 90%;
+    padding: 10px;
+    background-color: var(--color4);
+    color: var(--color2);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.btn_iniciar_sesion:hover {
+    background-color: var(--color5);
+}
+
+.btn_registrar_admin {
+    width: 85%;
+    display: inline-block;
+    background-color: var(--color4);
+    color: var(--color2);
+    text-decoration: none;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.btn_registrar_admin:hover {
+    background-color: var(--color5);
+}
+
+.contenedor2 p {
+    color: var(--color2);
+}
+
+.contenedor1 hr{
+    width: 300px;
+}
+
+.avisoerror {
+    background-color: var(--color6);
+    color: var(--color2);
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 90px;
+}
+
+/* PANEL ADMINISTRADOR CSS-------------------------------------- */
+.contenedorbienvenido {
+    text-align: center;
+    background-color: var(--color2);
+    width: 300px;
+    padding: 10px 0px;
+    color: var(--color5);
+}
+
+.contenedormenu {
+    width: 300px;
+    background-color: var(--color1);
+    display: inline-block;
+    vertical-align: top;
+}
+
+.echoAdmin {
+    color: var(--color2);
+    font-size: 20px;
+}
+
+
+.logo_admin {
+    width: 155px;
+    height: 150px;
+    margin-top: 20px;
+}
+
+.contenedorpaneladmin {
+    width: 880px;
+    background-color: var(--color5);
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+}
+
+.iconomenu {
+    width: 30px;
+    vertical-align: middle;
+    margin-left: 25px;
+}
+
+input[type="date"]{
+    color: gray;
+}
+
+input[type="date"]:valid{
+    color: black;
+}
+
+
+.hrefsmenu {
+    color: var(--color2);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    position: relative; /* Necesario para el pseudo-elemento */
+    padding: 5px 0; /* Un poco de espacio alrededor del texto */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.hrefsmenu:hover {
+    color: var(--color2); /* Color que cambia al pasar el ratón */
+}
+
+.hrefsmenu::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color2); /* Color de la línea */
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.hrefsmenu:hover::before {
+    visibility: visible;
+    width: 110%; /* Expande la línea en hover */
+}
+
+.hrs {
+    margin-top: -5px;
+    width: 200px;
+}
+
+.contenedor4 {
+    width: 850px;
+    color: var(--color2);
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.contenedor4 hr {
+    margin-top: -10px;
+    width: 550px;
+    border: 2px var(--color2) solid;
+}
+
+.contenedor5 {
+    width: 800px;
+    background-color: var(--color4);
+    color: var(--color2);
+    padding: 10px;
+    margin-left: 30px;
+    border-radius: 5px;
+}
+
+.contenedor5 p {
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.logopaneladmin {
+    width: 300px;
+
+}
+
+.logopaneladmin1 {
+    width: 200px;
+}
+
+.btn_registrar_admin_2 {
+    width: 200px;
+    display: inline-block;
+    background-color: var(--color1);
+    color: var(--color2);
+    text-decoration: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.btn_registrar_admin_2:hover {
+    background-color: var(--color5);
+}
+
+.icono_tabla_admin {
+    width: 30px;
+}
+
+table {
+    width: 95%;
+    margin-left: 20px;
+}
+
+table tr th {
+    padding: 5px 5px;
+    background-color: var(--color1);
+    color: white;
+}
+
+table tr td {
+    color: black;
+    background-color: var(--color2);
+    padding: 5px 5px;
+}
+
+.contenedor4 {
+    width: 850px;
+    color: var(--color2);
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.contenedor4 hr {
+    margin-top: -10px;
+    width: 550px;
+    border: 2px var(--color2) solid;
+}
+
+.contenedor5 {
+    width: 800px;
+    background-color: var(--color4);
+    color: var(--color5);
+    padding: 10px;
+    margin-left: 30px;
+    border-radius: 5px;
+}
+
+.contenedor5 p {
+    font-size: 18px;
+    line-height: 25px;
+    color: var(--color2);
+}
+
+.btn_regresar {
+    width: 130px;
+    display: inline-block;
+    background-color: var(--color1);
+    color: var(--color2);
+    text-decoration: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.btn_regresar:hover {
+    background-color: var(--color5);
+}
+
+
+.contenedor6 {
+    width: 85%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 80px;
+    color: var(--color2);
+}
+
+.contenedor6 hr {
+    width: 500px;
+    margin-left: 60px;
+}
+
+.registrar_admin {
+    width: 88.5%;
+    padding: 10px;
+    background-color: var(--color1);
+    color: var(--color2);
+    border: none;
+    border-radius: 5px;
+}
+
+.registrar_admin:hover {
+    background-color: var(--color5);
+}
+
+.contenedor7 hr{
+    width: 100%;
+}
+
+.contenedor7 {
+    color: var(--color2);
+    text-align: left;
+    padding: 5px 20px;
+}
+.imagen_articulo_tabla{
+    width: 100px;
+}
+.imagen_articulo_ver{
+    width: 400px;
+}
+.foto_helados
+{
+    width: 180px;
+}
+.boton_pdf{
+    background-color: red;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+    display: inline-block;
+}
+.imagenpdf{
+    width: 100px;
+}
+.botonpdfposicion{
+    padding-left: 600px;
+}
