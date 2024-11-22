@@ -69,12 +69,27 @@
                     <option value="Mesa 10">Mesa 10</option>
                 </select><br><br>
                 <label for="#">Seleccione un método de pago:</label>
-                <select name="metodo_pago" class="inputs_campos" id="metodo_pago" required>
-                    <option value="" disabled selected></option>
-                    <option value="Tarjeta de crédito o debito">Tarjeta de crédito o debito</option>
-                    <option value="Pago en efectivo">Pago en efectivo</option>
-                </select><br><br>
-                
+    <select name="metodo_pago" class="inputs_campos" id="metodo_pago" onchange="mostrarCamposTarjeta()" required>
+        <option value="" disabled selected></option>
+        <option value="Tarjeta de crédito o debito">Tarjeta de crédito o debito</option>
+        <option value="Pago en efectivo">Pago en efectivo</option>
+    </select><br><br>
+
+    <!-- Nuevos campos para tarjeta -->
+    <div id="campos_tarjeta" style="display: none;">
+        <label for="numero_tarjeta">Número de tarjeta:</label>
+        <input class="inputs_campos" type="text" name="numero_tarjeta" id="numero_tarjeta" 
+               maxlength="16" pattern="\d{16}" 
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+               placeholder="Ingrese los 16 dígitos"><br><br>
+        
+        <label for="nip_tarjeta">NIP:</label>
+        <input class="inputs_campos" type="password" name="nip_tarjeta" id="nip_tarjeta" 
+               maxlength="4" pattern="\d{4}" 
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+               placeholder="Ingrese 4 dígitos"><br><br>
+    </div><br><br>
+
                 <label>Seleccione Dulces:</label><br>
                 <?php
                 require "conexion.php";
@@ -149,6 +164,74 @@
 
                         return true;
                     }
+                    //  aparece el metodo de pago
+                    function mostrarCamposTarjeta() {
+        var metodoPago = document.getElementById('metodo_pago').value;
+        var camposTarjeta = document.getElementById('campos_tarjeta');
+        
+        if (metodoPago === 'Tarjeta de crédito o debito') {
+            camposTarjeta.style.display = 'block';
+        } else {
+            camposTarjeta.style.display = 'none';
+            // Limpiar los campos cuando se ocultan
+            document.getElementById('numero_tarjeta').value = '';
+            document.getElementById('nip_tarjeta').value = '';
+        }
+    }
+
+    function validarFormulario() {
+        let nombre = document.getElementById('nombre_cliente_pedido').value.trim();
+        let correo = document.getElementById('correo_cliente_pedido').value.trim();
+        let telefono = document.getElementById('telefono_cliente_pedido').value.trim();
+        let numeroMesa = document.getElementById('numero_mesa').value.trim();
+        let metodoPago = document.getElementById('metodo_pago').value.trim();
+        const nombreRegex = /^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/;
+        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validaciones existentes...
+        if (!nombre || !nombreRegex.test(nombre)) {
+            alert("El nombre solo puede contener letras y no puede estar vacío o consistir solo en espacios.");
+            return false;
+        }
+
+        if (!correo || !correoRegex.test(correo)) {
+            alert("Por favor, ingrese un correo electrónico válido.");
+            return false;
+        }
+
+        if (!telefono.match(/^999\d{7}$/)) {
+            alert("El número de teléfono debe empezar con '999' y tener 10 dígitos en total.");
+            return false;
+        }
+
+        if (!numeroMesa || numeroMesa === "") {
+            alert("Por favor, seleccione un número de mesa.");
+            return false;
+        }
+
+        if (!metodoPago || metodoPago === "") {
+            alert("Por favor, seleccione un método de pago.");
+            return false;
+        }
+
+        // Nueva validación para los campos de tarjeta
+        if (metodoPago === 'Tarjeta de crédito o debito') {
+            let numeroTarjeta = document.getElementById('numero_tarjeta').value;
+            let nipTarjeta = document.getElementById('nip_tarjeta').value;
+
+            if (!numeroTarjeta.match(/^\d{16}$/)) {
+                alert("Por favor, ingrese un número de tarjeta válido de 16 dígitos.");
+                return false;
+            }
+
+            if (!nipTarjeta.match(/^\d{4}$/)) {
+                alert("Por favor, ingrese un NIP válido de 4 dígitos.");
+                return false;
+            }
+        }
+
+        return true;
+    }
                 </script>
                 <br>
                 <label>Comentarios extras del pedido</label>
@@ -158,7 +241,7 @@
                 <br><br>
             </form>
         </div>
-    </div>
+    </div> <br>
 
     <div class="ancho contenedor_info">
         <div class="visitanos1">
