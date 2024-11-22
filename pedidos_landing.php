@@ -89,6 +89,7 @@ function detectarBanco(numeroTarjeta) {
         { nombre: 'HSBC', prefijos: ['4212', '5226', '5227'], longitud: [16] },
         { nombre: 'Banco Azteca', prefijos: ['5026', '5542'], longitud: [16] },
         { nombre: 'American Express', prefijos: ['3'], longitud: [15] },
+        { nombre: 'Visa', prefijos: ['4152'], longitud: [16] },
         { nombre: 'Mastercard', prefijos: ['5'], longitud: [16] }
     ];
 
