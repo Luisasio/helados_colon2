@@ -76,19 +76,84 @@
     </select><br><br>
 
     <!-- Nuevos campos para tarjeta -->
-    <div id="campos_tarjeta" style="display: none;">
-        <label for="numero_tarjeta">Número de tarjeta:</label>
-        <input class="inputs_campos" type="text" name="numero_tarjeta" id="numero_tarjeta" 
-               maxlength="16" pattern="\d{16}" 
-               oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-               placeholder="Ingrese los 16 dígitos"><br><br>
+    <script>
+function detectarBanco(numeroTarjeta) {
+    // Eliminar espacios y guiones
+    numeroTarjeta = numeroTarjeta.replace(/[\s-]/g, '');
+
+    // Patrones de prefijos para bancos mexicanos
+    const bancos = [
+        { nombre: 'Banamex', prefijos: ['4220', '4242', '3540'], longitud: [16] },
+        { nombre: 'Bancomer', prefijos: ['4152', '4154', '4155'], longitud: [16] },
+        { nombre: 'Santander', prefijos: ['4013', '4019', '5468'], longitud: [16] },
+        { nombre: 'HSBC', prefijos: ['4212', '5226', '5227'], longitud: [16] },
+        { nombre: 'Banco Azteca', prefijos: ['5026', '5542'], longitud: [16] },
+        { nombre: 'American Express', prefijos: ['3'], longitud: [15] },
+        { nombre: 'Mastercard', prefijos: ['5'], longitud: [16] }
+    ];
+
+    for (let banco of bancos) {
+        // Verificar prefijos y longitud
+        if (banco.prefijos.some(prefijo => numeroTarjeta.startsWith(prefijo)) && 
+            banco.longitud.includes(numeroTarjeta.length)) {
+            return banco.nombre;
+        }
+    }
+
+    return 'Banco no identificado';
+}
+
+// Función para mostrar el banco en tiempo real
+function mostrarBanco() {
+    const numeroTarjeta = document.getElementById('numero_tarjeta').value;
+    const bancoDetectado = document.getElementById('banco_detectado');
+    
+    if (numeroTarjeta.length >= 3) {
+        bancoDetectado.textContent = detectarBanco(numeroTarjeta);
+        bancoDetectado.style.display = 'block';
+    } else {
+        bancoDetectado.style.display = 'none';
+    }
+}
+
+// Modificar la función validarFormulario para usar la detección de banco
+function validarFormulario() {
+    // Validaciones anteriores...
+    
+    if (metodoPago === 'Tarjeta de crédito o debito') {
+        let numeroTarjeta = document.getElementById('numero_tarjeta').value;
+        let nipTarjeta = document.getElementById('nip_tarjeta').value;
+        let bancoDetectado = detectarBanco(numeroTarjeta);
+
+        if (bancoDetectado === 'Banco no identificado') {
+            alert("Por favor, ingrese un número de tarjeta válido.");
+            return false;
+        }
         
-        <label for="nip_tarjeta">NIP:</label>
-        <input class="inputs_campos" type="password" name="nip_tarjeta" id="nip_tarjeta" 
-               maxlength="4" pattern="\d{4}" 
-               oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-               placeholder="Ingrese 4 dígitos"><br><br>
-    </div><br><br>
+        // Resto de validaciones...
+    }
+
+    return true;
+}
+</script>
+
+<!-- Modificar el HTML para incluir la detección de banco -->
+<div id="campos_tarjeta" style="display: none;">
+    <label for="numero_tarjeta">Número de tarjeta:</label>
+    <input class="inputs_campos" type="text" name="numero_tarjeta" id="numero_tarjeta" 
+           maxlength="16" pattern="\d{16}" 
+           oninput="this.value = this.value.replace(/[^0-9]/g, ''); mostrarBanco();" 
+           placeholder="Ingrese los 16 dígitos"><br>
+    
+    <!-- Mostrar banco detectado -->
+    <div id="banco_detectado" style="display: none; color: blue; margin-bottom: 10px;"></div>
+    
+    <label for="nip_tarjeta">NIP:</label>
+    <input class="inputs_campos" type="password" name="nip_tarjeta" id="nip_tarjeta" 
+           maxlength="4" pattern="\d{4}" 
+           oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+           placeholder="Ingrese 4 dígitos"><br><br>
+</div><br><br>
 
                 <label>Seleccione Dulces:</label><br>
                 <?php
