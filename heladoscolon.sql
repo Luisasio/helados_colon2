@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2024 a las 22:28:22
+-- Tiempo de generación: 23-11-2024 a las 20:30:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -92,11 +92,12 @@ INSERT INTO `dulces` (`id_dulces`, `dulce`, `descripcion`, `precio`, `ruta`, `co
 (3, 'Cudrado', 'Delicia en forma de cuadrado, elaborada con capas de galleta o bizcocho, rellena de crema, chocolate', '21', 'imagen_dulce/2024-10-19-09-13-08-cuadrado.jpg', 1213435678),
 (4, 'Pionono de crema', ' Postre enrollado de bizcocho suave, relleno de crema pastelera y cubierto con azúcar o chocolate', '24', 'imagen_dulce/2024-10-19-09-14-24-pinono.png', 1145678786),
 (5, 'Pionono de yema', 'Postre enrollado de bizcocho suave, relleno de yema de huevo batida y cubierto de azúcar o glaseado', '34', 'imagen_dulce/2024-10-19-09-15-55-pinonono-yema.jpg', 1256454563),
-(6, 'Oreja', 'Postre crujiente en forma de oreja, elaborado con masa de hojaldre y espolvoreado con azúcar. Delici', '15', 'imagen_dulce/2024-10-19-09-16-52-oreja.jpeg', 1215463436),
+(6, 'Oreja', 'Oreja nueva', '16', 'imagen_dulce/2024-11-19-09-22-51-cosa loca.png', 1215463436),
 (7, 'Corbata', 'Postre en forma de lazo, hecho de masa de hojaldre y espolvoreado con azúcar. Crujiente y ligero', '15', 'imagen_dulce/2024-10-19-09-18-03-corbata.jpg', 1180775643),
 (8, 'Panatela', 'Bizcocho suave y esponjoso, típicamente empapado en jarabe, ideal para postres o como base para otro', '16', 'imagen_dulce/2024-10-19-09-19-06-panetela.jpeg', 1345376859),
 (9, 'Bororo', 'Delicia a base de harina de maíz, dulce y esponjoso, a menudo combinado con leche o frutas', '18', 'imagen_dulce/2024-10-19-09-19-54-bororo.jpg', 1143567843),
-(10, 'Chantilly', 'Crema batida ligera y aireada, endulzada y a menudo saborizada con vainilla, perfecta para cubrir pa', '26', 'imagen_dulce/2024-10-19-09-21-36-chantiyi.jpg', 1123356782);
+(10, 'Chantilly', 'Crema batida ligera y aireada, endulzada y a menudo saborizada con vainilla, perfecta para cubrir pa', '26', 'imagen_dulce/2024-10-19-09-21-36-chantiyi.jpg', 1123356782),
+(15, 'Dulce de leche', 'Delicicioso dulce de leche tradicional que trae a tu infancia recordando viejos sabores y llevandote', '50', 'imagen_dulce/2024-11-19-09-25-37-images.jpg', 973664799);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,7 @@ INSERT INTO `empleados` (`id_empleado`, `nombre_empleado`, `correo_empleado`, `f
 CREATE TABLE `helados` (
   `id_helados` int(5) NOT NULL,
   `helado` varchar(100) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
+  `descripcion` text NOT NULL,
   `precio` varchar(100) NOT NULL,
   `ruta` varchar(100) NOT NULL,
   `codigo` int(10) NOT NULL
@@ -174,16 +175,43 @@ CREATE TABLE `pedidos` (
   `numero_mesa` varchar(100) DEFAULT NULL,
   `metodo_pago` varchar(100) DEFAULT NULL,
   `pedido_cliente_pedido` varchar(255) DEFAULT NULL,
-  `comentarios_cantidad` varchar(255) DEFAULT NULL
+  `comentarios_cantidad` varchar(255) DEFAULT NULL,
+  `numero_tarjeta` bigint(100) DEFAULT NULL,
+  `nip_tarjeta` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `nombre_cliente_pedido`, `correo_cliente_pedido`, `telefono_cliente_pedido`, `numero_mesa`, `metodo_pago`, `pedido_cliente_pedido`, `comentarios_cantidad`) VALUES
-(14, 'Alan Daniel Torres Fuentes', 'prueba@prueba.com', '9994746543', 'Mesa 5', 'Tarjeta de crédito o debito', 'Dulces: Merengue, Arrollado, Cudrado; Helados: Helado de Fresa, Helado de limon; ', 'Sin mucha azúcar, por favor'),
-(16, 'José Justin Echeverría', 'megustaelhelado@gmail.com', '9995678456', 'Mesa 10', 'Tarjeta de crédito o debito', 'Dulces: Panatela, Bororo, Chantilly; Helados: Helado de Pitahaya, Helado de ciruela; ', 'Cuiden que el bororo no se caiga del vaso.');
+INSERT INTO `pedidos` (`id_pedido`, `nombre_cliente_pedido`, `correo_cliente_pedido`, `telefono_cliente_pedido`, `numero_mesa`, `metodo_pago`, `pedido_cliente_pedido`, `comentarios_cantidad`, `numero_tarjeta`, `nip_tarjeta`) VALUES
+(14, 'Alan Daniel Torres Fuentes', 'prueba@prueba.com', '9994746543', 'Mesa 5', 'Tarjeta de crédito o debito', 'Dulces: Merengue, Arrollado, Cudrado; Helados: Helado de Fresa, Helado de limon; ', 'Sin mucha azúcar, por favor', 0, 0),
+(16, 'José Justin Echeverría', 'megustaelhelado@gmail.com', '9995678456', 'Mesa 10', 'Tarjeta de crédito o debito', 'Dulces: Panatela, Bororo, Chantilly; Helados: Helado de Pitahaya, Helado de ciruela; ', 'Cuiden que el bororo no se caiga del vaso.', 0, 0),
+(17, 'Jose Ake Torres', 'joseecheverria573@gmail.com', '9999999999', 'Mesa 7', 'Tarjeta de crédito o debito', 'Dulces: Merengue=2; Helados: Helado de Coco=2; ', 'Una cuchara extra porfavor', 0, 0),
+(18, 'Jose Ake Torres', 'odessa.hdez@gmail.com', '9998888888', 'Mesa 10', 'Tarjeta de crédito o debito', 'Dulces: Cudrado=2; Helados: Helado de piña=1, Helado de anona=1; ', 'prueba1', 4152314206860689, 2531),
+(19, 'Jose Ake Torres', 'odessa.hdez@gmail.com', '9999998076', 'Mesa 10', 'Tarjeta de crédito o debito', 'Dulces: Pionono de crema=1; Helados: Helado de chocolate=1, Helado de Guanabana=1; ', 'prueba 1', 5267770980650407, 1234),
+(20, 'Jose Ake Torres', 'odessa.hdez@gmail.com', '9999878787', 'Mesa 10', 'Tarjeta de crédito o debito', 'Dulces: Pionono de yema=2; Helados: Helado de Guanabana=1, Helado de Guayaba=1; ', 'Prueba 2', 5267770980650407, 1234);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarjetas`
+--
+
+CREATE TABLE `tarjetas` (
+  `id_tarjeta` int(5) NOT NULL,
+  `numero_tarjeta` bigint(100) DEFAULT NULL,
+  `nip_tarjeta` int(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarjetas`
+--
+
+INSERT INTO `tarjetas` (`id_tarjeta`, `numero_tarjeta`, `nip_tarjeta`) VALUES
+(1, 5267770980650407, 1234),
+(2, 4152314206860689, 4321),
+(3, 4152314264218481, 3142);
 
 --
 -- Índices para tablas volcadas
@@ -227,6 +255,12 @@ ALTER TABLE `pedidos`
   ADD KEY `pedido_cliente_pedido` (`pedido_cliente_pedido`);
 
 --
+-- Indices de la tabla `tarjetas`
+--
+ALTER TABLE `tarjetas`
+  ADD PRIMARY KEY (`id_tarjeta`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -246,7 +280,7 @@ ALTER TABLE `articulos`
 -- AUTO_INCREMENT de la tabla `dulces`
 --
 ALTER TABLE `dulces`
-  MODIFY `id_dulces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_dulces` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -264,7 +298,13 @@ ALTER TABLE `helados`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `tarjetas`
+--
+ALTER TABLE `tarjetas`
+  MODIFY `id_tarjeta` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

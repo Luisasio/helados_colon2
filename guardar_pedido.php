@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 error_log("Datos POST recibidos: " . print_r($_POST, true));
 
 // Verificar que los campos requeridos existen
-$required_fields = ['nombre_cliente_pedido', 'correo_cliente_pedido', 'telefono_cliente_pedido', 'numero_mesa', 'metodo_pago'];
+$required_fields = ['nombre_cliente_pedido', 'correo_cliente_pedido', 'telefono_cliente_pedido', 'numero_mesa', 'metodo_pago', 'numero_tarjeta', 'nip_tarjeta'];
 foreach ($required_fields as $field) {
     if (!isset($_POST[$field]) || empty($_POST[$field])) {
         die("Error: Campo requerido '$field' está vacío o no existe");
@@ -27,15 +27,23 @@ $numero_tarjeta = addslashes($_POST['numero_tarjeta']);
 $nip_tarjeta = addslashes($_POST['nip_tarjeta']);
 $comentarios_cantidad = addslashes($_POST['comentarios_cantidad'] ?? '');
 
-// echo $nombre_cliente_pedido;
-// echo $correo_cliente_pedido;
-// echo $telefono_cliente_pedido;
-// echo $numero_mesa;
-// echo $metodo_pago;
-// echo $numero_tarjeta;
-// echo $nip_tarjeta;
-// echo $comentarios_cantidad;
-// exit;
+// Validar si el número de tarjeta y el NIP existen en la base de datos
+// Validar si el número de tarjeta y el NIP existen en la base de datos
+$consulta_tarjeta = "SELECT * FROM tarjetas WHERE numero_tarjeta = '$numero_tarjeta' LIMIT 1";
+$resultado_tarjeta = mysqli_query($conectar, $consulta_tarjeta);
+
+if (mysqli_num_rows($resultado_tarjeta) > 0) {
+    $fila_tarjeta = $resultado_tarjeta->fetch_array();
+
+    // Verificar si el NIP coincide (comparación directa)
+    if ($nip_tarjeta !== $fila_tarjeta['nip_tarjeta']) {
+        die("Error: El NIP ingresado no es correcto.");
+    }
+} else {
+    die("Error: La tarjeta no está registrada en el sistema.");
+}
+
+
 // Inicializamos una variable para almacenar los dulces y helados seleccionados con cantidades
 $pedidos_cliente_pedidos = "";
 
@@ -67,9 +75,9 @@ if (!empty($_POST['helados'])) {
     }
 }
 
-// Debug - Ver la consulta SQL antes de ejecutarla
-$insertar_pedido = "INSERT INTO pedidos (nombre_cliente_pedido, correo_cliente_pedido, telefono_cliente_pedido, numero_mesa, metodo_pago, comentarios_cantidad, pedido_cliente_pedido)
-                    VALUES ('$nombre_cliente_pedido','$correo_cliente_pedido', '$telefono_cliente_pedido', '$numero_mesa', '$metodo_pago', '$comentarios_cantidad', '$pedidos_cliente_pedidos')";
+// Insertar el pedido en la base de datos
+$insertar_pedido = "INSERT INTO pedidos (nombre_cliente_pedido, correo_cliente_pedido, telefono_cliente_pedido, numero_mesa, metodo_pago, comentarios_cantidad, pedido_cliente_pedido, numero_tarjeta, nip_tarjeta)
+                    VALUES ('$nombre_cliente_pedido','$correo_cliente_pedido', '$telefono_cliente_pedido', '$numero_mesa', '$metodo_pago', '$comentarios_cantidad', '$pedidos_cliente_pedidos', '$numero_tarjeta', '$nip_tarjeta')";
 error_log("Consulta SQL a ejecutar: " . $insertar_pedido);
 
 // Ejecutar la consulta y capturar cualquier error
@@ -91,4 +99,7 @@ if ($query_pedido) {
         window.history.go(-1);
     </script>';
 }
+
+mysqli_free_result($resultado_tarjeta);
+mysqli_close($conectar);
 ?>

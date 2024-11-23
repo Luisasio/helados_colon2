@@ -2,7 +2,7 @@
 $host = "localhost";
 $usuario = "root";
 $contrasena = "";
-$basedatos = "heladoscolon"; //nombre de la base de datos 
+$basedatos = "helados_colon2"; //nombre de la base de datos 
 
 $conectar = mysqli_connect($host, $usuario, $contrasena, $basedatos);
 
