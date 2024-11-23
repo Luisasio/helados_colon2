@@ -1,12 +1,12 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db = "heladoscolon";
+$usuario = "root";
+$contrasena = "";
+$basedatos = "heladoscolon"; //nombre de la base de datos 
 
-$conectar = mysqli_connect($host, $user, $pass, $db);
+$conectar = mysqli_connect($host, $usuario, $contrasena, $basedatos);
 
 if (!$conectar) {
-    echo "No se puedo conectar a la base de datos";
+  echo "No se pudo conectar con el servidor";
 }
 ?>

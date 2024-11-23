@@ -23,8 +23,19 @@ $correo_cliente_pedido = addslashes($_POST['correo_cliente_pedido']);
 $telefono_cliente_pedido = addslashes($_POST['telefono_cliente_pedido']);
 $numero_mesa = addslashes($_POST['numero_mesa']);
 $metodo_pago = addslashes($_POST['metodo_pago']);
+$numero_tarjeta = addslashes($_POST['numero_tarjeta']);
+$nip_tarjeta = addslashes($_POST['nip_tarjeta']);
 $comentarios_cantidad = addslashes($_POST['comentarios_cantidad'] ?? '');
 
+// echo $nombre_cliente_pedido;
+// echo $correo_cliente_pedido;
+// echo $telefono_cliente_pedido;
+// echo $numero_mesa;
+// echo $metodo_pago;
+// echo $numero_tarjeta;
+// echo $nip_tarjeta;
+// echo $comentarios_cantidad;
+// exit;
 // Inicializamos una variable para almacenar los dulces y helados seleccionados con cantidades
 $pedidos_cliente_pedidos = "";
 
