@@ -372,3 +372,50 @@ table tr td {
 .botonpdfposicion{
     padding-left: 600px;
 }
+.ticket{
+    color: green;
+    font-size: 30px;
+  }
+  .confirmation-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--color5);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .folio {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    font-size: 40px;
+  }
+  .team-info {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 4px;
+    color: #333;
+  }
+  .team-info h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .team-info p {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .participant-list {
+    list-style: none;
+    padding: 0;
+  }
+  .participant-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .success-message {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+  }

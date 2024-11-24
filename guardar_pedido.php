@@ -9,13 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 // Debug - Ver todos los datos recibidos
 error_log("Datos POST recibidos: " . print_r($_POST, true));
 
-// Verificar que los campos requeridos existen
-$required_fields = ['nombre_cliente_pedido', 'correo_cliente_pedido', 'telefono_cliente_pedido', 'numero_mesa', 'metodo_pago', 'numero_tarjeta', 'nip_tarjeta'];
-foreach ($required_fields as $field) {
-    if (!isset($_POST[$field]) || empty($_POST[$field])) {
-        die("Error: Campo requerido '$field' está vacío o no existe");
-    }
-}
+
 
 // Recoger los datos del formulario
 $nombre_cliente_pedido = addslashes($_POST['nombre_cliente_pedido']);
@@ -27,6 +21,7 @@ $numero_tarjeta = addslashes($_POST['numero_tarjeta']);
 $nip_tarjeta = addslashes($_POST['nip_tarjeta']);
 $comentarios_cantidad = addslashes($_POST['comentarios_cantidad'] ?? '');
 
+
 // Validar si el número de tarjeta y el NIP existen en la base de datos
 // Validar si el número de tarjeta y el NIP existen en la base de datos
 $consulta_tarjeta = "SELECT * FROM tarjetas WHERE numero_tarjeta = '$numero_tarjeta' LIMIT 1";
@@ -37,7 +32,10 @@ if (mysqli_num_rows($resultado_tarjeta) > 0) {
 
     // Verificar si el NIP coincide (comparación directa)
     if ($nip_tarjeta !== $fila_tarjeta['nip_tarjeta']) {
-        die("Error: El NIP ingresado no es correcto.");
+        die('<script>
+            alert("El nip introducido no es correcto");
+            location.href="pedidos_landing.php";
+          </script>');
     }
 } else {
     die("Error: La tarjeta no está registrada en el sistema.");
@@ -88,18 +86,39 @@ if (!$query_pedido) {
 }
 
 // Verificar si la inserción fue exitosa y mostrar alerta
-if ($query_pedido) {
-    echo '<script>
-        alert("Se ha registrado el pedido correctamente");
-        window.location.href = "pedidos_landing.php";
-    </script>';
-} else {
-    echo '<script>
-        alert("Error al registrar el pedido. Por favor, intente nuevamente.");
-        window.history.go(-1);
-    </script>';
-}
+// if ($query_pedido) {
+//     echo '<script>
+//         alert("Se ha registrado el pedido correctamente");
+//         window.location.href = "pedidos_landing.php";
+//     </script>';
+// } else {
+//     echo '<script>
+//         alert("Error al registrar el pedido. Por favor, intente nuevamente.");
+//         window.history.go(-1);
+//     </script>';
+// }
 
+if ($query_pedido) {
+    // En lugar de mostrar el alert, redirigimos a la página de confirmación
+    // Pasamos los datos a través de la URL de forma segura
+    $params = http_build_query([
+        'nombre_cliente_pedido' => $nombre_cliente_pedido,
+        'correo_cliente_pedido' => $correo_cliente_pedido,
+        'telefono_cliente_pedido' => $telefono_cliente_pedido,
+        'numero_mesa' => $numero_mesa,
+        'metodo_pago' => $metodo_pago,
+        'comentarios_cantidad' => $comentarios_cantidad,
+    ]);
+    
+    header("Location: resumen_pedido.php?" . $params);
+    exit();
+  } 
+  else {
+    echo '<script>
+            alert("Error al guardar el pedido");
+            location.href="pedidos_landing.php";
+          </script>';
+  }
 mysqli_free_result($resultado_tarjeta);
 mysqli_close($conectar);
 ?>

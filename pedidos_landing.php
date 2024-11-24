@@ -70,7 +70,7 @@
                 </select><br><br>
                 <label for="#">Seleccione un método de pago:</label>
     <select name="metodo_pago" class="inputs_campos" id="metodo_pago" onchange="mostrarCamposTarjeta()" required>
-        <option value="" disabled selected></option>
+        <option value="" selected>Seleccione el metodo de pago</option>
         <option value="Tarjeta de crédito o debito">Tarjeta de crédito o debito</option>
         <option value="Pago en efectivo">Pago en efectivo</option>
     </select><br><br>
@@ -137,24 +137,173 @@ function validarFormulario() {
     return true;
 }
 </script>
+<div class="contenedor_pago ancho" id="campos_tarjeta" style="display: none;">
+    <p>Paga con tarjeta de credito</p>
+    <br>
+    <hr>
+    <br>
+    <label for="">Nombre en la tarjeta</label>
+    <input type="text" name="" class="elemento_form_pago" placeholder="Nombre como aparce en la tarjeta" maxlength="50" required> 
+    <br><br>
+    <div class="input-container">
+      <img src="img/visa.png" alt="icono" class="input-icon">
+      <img src="img/master.png" alt="icono" class="input-icon2">
+      <img src="img/american.png" alt="icono" class="input-icon3">
+      <label for="">Número de la tarjeta</label>
+      <input type="text" name="numero_tarjeta" id="numero_tarjeta" maxlength="19" class="elemento_form_pago" placeholder="0000 0000 0000 0000"  pattern="(\d{4} ?){4}"  oninput="this.value = this.value.replace(/[^0-9]/g, ''); mostrarBanco();">
+    </div>
+    <div id="banco_detectado" style="display: none; color: blue; margin-bottom: 10px;"></div>
+    <br><br>
+    <div class="form-container">
+      <div class="form-group">
+        <label for="expiracion">Expiración</label>
+        <input type="text" name="expiracion" id="expiration" maxlength="5" class="elemento_form_pago1 input-expiration" placeholder="MM/AA">
+        <div class="error-message">Ingresa una fecha válida</div>
+      </div>
+      <div class="form-group">
+        <label for="cvv">NIP</label>
+        <input type="password" name="nip_tarjeta" id="nip_tarjeta" maxlength="4" pattern="\d{4}" oninput="this.value = this.value.replace(/[^0-9]/g, '')"   class="elemento_form_pago1" placeholder="NIP de 4 digitos">
+      </div>
+    </div>
+  </div>
+  <script>
+      const cardInput = document.getElementById('numero_tarjeta');
 
+      cardInput.addEventListener('input', function(e) {
+          // Eliminar cualquier caracter que no sea número
+          let valor = e.target.value.replace(/\D/g, '');
+          
+          // Agregar un espacio cada 4 dígitos
+          valor = valor.replace(/(\d{4})(?=\d)/g, '$1 ');
+          
+          // Actualizar el valor del input
+          e.target.value = valor;
+      });
+
+      // Opcional: Prevenir que se pegue texto con formato incorrecto
+      cardInput.addEventListener('paste', function(e) {
+          e.preventDefault();
+          let texto = (e.clipboardData || window.clipboardData).getData('text');
+          texto = texto.replace(/\D/g, '');
+          texto = texto.replace(/(\d{4})(?=\d)/g, '$1 ');
+          
+          // Solo tomar los primeros 16 dígitos
+          texto = texto.slice(0, 19);
+          
+          this.value = texto;
+      });
+
+      const expirationInput = document.getElementById('expiration');
+
+            function formatExpiration(value) {
+                // Eliminar cualquier caracter que no sea número
+                let cleanValue = value.replace(/\D/g, '');
+                
+                // Limitar a 4 dígitos
+                cleanValue = cleanValue.slice(0, 4);
+                
+                // Separar mes y año
+                if (cleanValue.length > 2) {
+                    return cleanValue.slice(0, 2) + '/' + cleanValue.slice(2);
+                }
+                
+                return cleanValue;
+            }
+
+            function validateExpiration(month, year) {
+                // Convertir a números
+                const currentDate = new Date();
+                const currentYear = currentDate.getFullYear() % 100; // Obtener últimos 2 dígitos del año
+                const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11
+                
+                month = parseInt(month, 10);
+                year = parseInt(year, 10);
+                
+                // Validar mes
+                if (month < 1 || month > 12) return false;
+                
+                // Validar que la fecha no esté en el pasado
+                if (year < currentYear || (year === currentYear && month < currentMonth)) return false;
+                
+                // Validar que la fecha no esté muy en el futuro (opcional, ajusta según necesites)
+                if (year > currentYear + 6) return false;
+                
+                return true;
+            }
+
+        expirationInput.addEventListener('input', function(e) {
+            let value = e.target.value;
+            
+            // Si el usuario intenta escribir una letra, la ignoramos
+            if (/[^\d/]/.test(value)) {
+                value = value.replace(/[^\d/]/g, '');
+            }
+            
+            // Formatear el valor
+            let formattedValue = formatExpiration(value);
+            
+            // Actualizar el valor del input
+            e.target.value = formattedValue;
+            
+            // Validar si tenemos una fecha completa
+            if (formattedValue.length === 5) {
+                const [month, year] = formattedValue.split('/');
+                
+                if (validateExpiration(month, year)) {
+                    this.classList.add('valid');
+                    this.classList.remove('invalid');
+                } else {
+                    this.classList.add('invalid');
+                    this.classList.remove('valid');
+                }
+            } else {
+                this.classList.remove('valid', 'invalid');
+            }
+        });
+
+        // Manejar cuando el usuario pega un texto
+        expirationInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            let pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            let formattedValue = formatExpiration(pastedText);
+            this.value = formattedValue;
+        });
+
+        // Validación adicional mientras se escribe
+        expirationInput.addEventListener('keypress', function(e) {
+            // Permitir solo números y la tecla de borrar
+            if (!/^\d$/.test(e.key) && e.key !== 'Backspace') {
+                e.preventDefault();
+            }
+            
+            // Si el primer número es mayor a 1, solo permitir 0-2 como segundo número
+            if (this.value.length === 1 && this.value[0] === '1' && parseInt(e.key) > 2) {
+                e.preventDefault();
+            }
+            
+            // No permitir meses mayores a 12
+            if (this.value.length === 1 && parseInt(this.value + e.key) > 12) {
+                e.preventDefault();
+            }
+        });
+  </script>
 <!-- Modificar el HTML para incluir la detección de banco -->
-<div id="campos_tarjeta" style="display: none;">
+<!-- <div id="campos_tarjeta" style="display: none;">
     <label for="numero_tarjeta">Número de tarjeta:</label>
     <input class="inputs_campos" type="text" name="numero_tarjeta" id="numero_tarjeta" 
            maxlength="16" pattern="\d{16}" 
            oninput="this.value = this.value.replace(/[^0-9]/g, ''); mostrarBanco();" 
-           placeholder="Ingrese los 16 dígitos"><br>
+           placeholder="Ingrese los 16 dígitos"><br> -->
     
     <!-- Mostrar banco detectado -->
-    <div id="banco_detectado" style="display: none; color: blue; margin-bottom: 10px;"></div>
+    <!-- <div id="banco_detectado" style="display: none; color: blue; margin-bottom: 10px;"></div>
     
     <label for="nip_tarjeta">NIP:</label>
     <input class="inputs_campos" type="password" name="nip_tarjeta" id="nip_tarjeta" 
            maxlength="4" pattern="\d{4}" 
            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
            placeholder="Ingrese 4 dígitos"><br><br>
-</div><br><br>
+</div><br><br> -->
 
                 <label>Seleccione Dulces:</label><br>
                 <?php
@@ -251,6 +400,7 @@ function validarFormulario() {
         let telefono = document.getElementById('telefono_cliente_pedido').value.trim();
         let numeroMesa = document.getElementById('numero_mesa').value.trim();
         let metodoPago = document.getElementById('metodo_pago').value.trim();
+        let expirationInput = document.getElementById('expiration');
         const nombreRegex = /^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/;
         const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -280,20 +430,29 @@ function validarFormulario() {
             return false;
         }
 
-        // Nueva validación para los campos de tarjeta
+       // Nueva validación para los campos de tarjeta
         if (metodoPago === 'Tarjeta de crédito o debito') {
             let numeroTarjeta = document.getElementById('numero_tarjeta').value;
             let nipTarjeta = document.getElementById('nip_tarjeta').value;
 
-            if (!numeroTarjeta.match(/^\d{16}$/)) {
-                alert("Por favor, ingrese un número de tarjeta válido de 16 dígitos.");
+            // Validar que el número de tarjeta tenga 16 dígitos agrupados en grupos de 4 separados por espacios
+            if (!numeroTarjeta.match(/^(\d{4} ?){4}$/)) {
+                alert("Por favor, ingrese un número de tarjeta válido en el formato 0000 0000 0000 0000.");
                 return false;
             }
 
+            // Validar que el NIP tenga exactamente 4 dígitos
             if (!nipTarjeta.match(/^\d{4}$/)) {
                 alert("Por favor, ingrese un NIP válido de 4 dígitos.");
                 return false;
             }
+
+              // Validar el campo de expiración
+                let expirationValue = expirationInput.value.trim();
+                if (expirationValue.length !== 5 || !expirationInput.classList.contains('valid')) {
+                    alert("Por favor, ingrese una fecha de expiración válida en el formato MM/AA.");
+                    return false;
+                }
         }
 
         return true;

@@ -12,7 +12,7 @@ $adminCorreo = $_SESSION['username'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
     <link rel="stylesheet" href="style_panel_admin.css">
-
+    <script src="https://kit.fontawesome.com/fe8b02346c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -38,6 +38,7 @@ $adminCorreo = $_SESSION['username'];
                         <th>ID del pedido</th>
                         <th>Nombre del cliente</th>
                         <th>Ver</th>
+                        <th>Ver Ticket</th>
                         <th>Confirmar pedido</th>
                     </tr>
                     <tr>
@@ -53,6 +54,7 @@ $adminCorreo = $_SESSION['username'];
                         <td><?php echo $fila["id_pedido"] ?></td>
                         <td><?php echo $fila["nombre_cliente_pedido"] ?></td>
                         <td><a href="ver_pedido.php?id=<?php echo $fila['id_pedido']; ?>"><img src="./img/icono_ver.png" class="icono_tabla_admin"></a></td>
+                        <td><a href="ver_ticket.php?id=<?php echo $fila['id_pedido']; ?>"><i class="fa-solid fa-file-invoice ticket"></i></a></td>
                         <td><a href="#" onclick="validar('eliminar_pedido.php?id=<?php echo $fila['id_pedido']; ?>')"><img src="./img/icono_confirmar.png" class="icono_tabla_admin"></a></a></td>
                     </tr>
                 <?php
